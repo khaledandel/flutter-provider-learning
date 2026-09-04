@@ -49,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 return controllar.userName;
               },
               builder: (BuildContext context, valueAsUserName, Widget? child) {
-                print("From User Name");
                 return Text(
                   valueAsUserName ?? '',
                   style: Theme.of(context).textTheme.headlineMedium,
@@ -75,7 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 return contrllar.counter;
               },
               builder: (BuildContext context, valueAsCounter, Widget? child) {
-                print("From Counter");
                 return Text(
                   valueAsCounter.toString(),
                   style: Theme.of(context).textTheme.headlineMedium,
