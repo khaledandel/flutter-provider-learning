@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CounterConterllar extends ChangeNotifier {
+  String? userName;
   int counter = 0;
 
   void incrementConter() {
     counter++;
     notifyListeners();
-    print("Cont");
+  }
+
+  void setUserName(String name) {
+    userName = name;
+    notifyListeners();
   }
 }

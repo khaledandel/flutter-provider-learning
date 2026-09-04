@@ -31,9 +31,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final int counter = context.watch<CounterConterllar>().counter;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -43,8 +44,48 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text('$counter', style: Theme.of(context).textTheme.headlineMedium),
+            Consumer(
+              builder:
+                  (
+                    BuildContext context,
+                    CounterConterllar value,
+                    Widget? child,
+                  ) {
+                    print("From User Name");
+                    return Text(
+                      value.userName ?? '',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    );
+                  },
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: TextField(controller: controller),
+            ),
+            SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {
+                context.read<CounterConterllar>().setUserName(controller.text);
+              },
+              child: Text('Submit user name'),
+            ),
+
+            SizedBox(height: 40),
+            Consumer(
+              builder:
+                  (
+                    BuildContext context,
+                    CounterConterllar value,
+                    Widget? child,
+                  ) {
+                    print("From Counter");
+                    return Text(
+                      value.counter.toString(),
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    );
+                  },
+            ),
           ],
         ),
       ),
