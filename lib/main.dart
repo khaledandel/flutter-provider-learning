@@ -44,19 +44,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            Consumer(
-              builder:
-                  (
-                    BuildContext context,
-                    CounterConterllar value,
-                    Widget? child,
-                  ) {
-                    print("From User Name");
-                    return Text(
-                      value.userName ?? '',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  },
+            Selector<CounterConterllar, String?>(
+              selector: (BuildContext context, controllar) {
+                return controllar.userName;
+              },
+              builder: (BuildContext context, valueAsUserName, Widget? child) {
+                print("From User Name");
+                return Text(
+                  valueAsUserName ?? '',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
             ),
 
             Padding(
@@ -72,19 +70,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             SizedBox(height: 40),
-            Consumer(
-              builder:
-                  (
-                    BuildContext context,
-                    CounterConterllar value,
-                    Widget? child,
-                  ) {
-                    print("From Counter");
-                    return Text(
-                      value.counter.toString(),
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    );
-                  },
+            Selector<CounterConterllar, int>(
+              selector: (BuildContext context, contrllar) {
+                return contrllar.counter;
+              },
+              builder: (BuildContext context, valueAsCounter, Widget? child) {
+                print("From Counter");
+                return Text(
+                  valueAsCounter.toString(),
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
             ),
           ],
         ),
